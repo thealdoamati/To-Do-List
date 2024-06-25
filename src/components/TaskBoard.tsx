@@ -2,10 +2,11 @@ import { Notepad } from 'phosphor-react'
 import styles from './TaskBoard.module.css'
 import Task from './Task'
 import { Dispatch, SetStateAction, useState } from 'react';
+import ITask from '../App'
 
 interface TaskBoardProps {
-    taskList: string[];
-    setTaskList: Dispatch<SetStateAction<string[]>>;
+    taskList: typeof ITask[];
+    setTaskList: Dispatch<SetStateAction<typeof ITask[]>>;
 }
 export default function TaskBoard({taskList, setTaskList}: TaskBoardProps){
     const [tasksCompleted, setTasksCompleted] = useState<string[]>([])
@@ -16,6 +17,8 @@ export default function TaskBoard({taskList, setTaskList}: TaskBoardProps){
         })
         setTaskList(tasksWithoutDeletedOne)
     }
+
+    console.log(taskList)
 
     console.log(tasksCompleted.length)
 

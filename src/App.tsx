@@ -5,9 +5,14 @@ import TaskBoard from './components/TaskBoard'
 import { PlusCircle } from 'phosphor-react'
 import { useState } from 'react'
 
+interface ITask {
+  id: number;
+  name: string;
+  isChecked: boolean;
+}
 export default function App() {
   const [taskText, setTaskText] = useState('');
-  const [taskList, setTaskList] = useState<string[]>([]);
+  const [taskList, setTaskList] = useState<ITask[]>([]);
 
   function handleTaskText(event){
     event.preventDefault();
@@ -17,7 +22,12 @@ export default function App() {
 
   function handleCreateTask(event){
     event.preventDefault();
-    setTaskList([...taskList, taskText]);
+    const newTask: ITask = {
+      id: new Date().getTime(),
+      name: taskText,
+      isChecked: false,
+    }
+    setTaskList((state) => [...taskList, newTask]);
     console.log(taskList);
     setTaskText('');
   }
