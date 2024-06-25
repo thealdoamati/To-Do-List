@@ -1,0 +1,15 @@
+.taskBoard {
+    margin-top: 2rem;
+}
+
+.noTask {
+    border-top: 1px solid;
+    border-radius: 8px;
+    border: 1;
+    display: flex;
+    padding: 3rem 2rem;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+}

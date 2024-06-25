@@ -1,10 +1,54 @@
 .wrapper {
+    justify-content: center;
+    align-items: center;
+    max-width: 70rem;
+    padding: 0 1rem;
+    gap: 3rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.addTask {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.addTask textarea {
+    background: var(--gray-400);
+    color: var(--gray-100);
+    border-color: var(--gray-700);
+    border: 1;
+    resize: none;
+    padding: 1.6rem 1rem;
+    width: 100%;
+    border-radius: 8px;
+    line-height: 0.1;
+    display: inline-block;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.addTask button {
+    background: var(--blue-dark);
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--gray-100);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.taskManage{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 
 }
 
-.header {
-    background: var(--gray-700);
+.taskInformations {
     display: flex;
-    justify-content: center;
-    padding: 4.5rem 0;
+    justify-content: space-between;
 }
