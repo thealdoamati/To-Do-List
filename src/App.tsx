@@ -64,8 +64,12 @@ export default function App() {
         </form>
         <div className={styles.taskManage}>
           <div className={styles.taskInformations}>
-            <div>Tarefas criadas<span>{taskList.length}</span></div>
-            <div>Concluídas<span>{tasksCompleted.length}</span></div>
+            <div className={styles.created}>
+              <h3>Tarefas criadas</h3><span>{taskList.length}</span>
+            </div>
+            <div className={styles.concluded}>
+              <h3>Concluídas</h3><span>{tasksCompleted.length}</span>
+            </div>
           </div>
           
           <div className={styles.taskBoard}>

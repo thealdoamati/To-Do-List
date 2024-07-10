@@ -22,7 +22,7 @@ export default function Task({toggleTaskCheck, task, onDelete}: TaskProps) {
                 <input type="checkbox" checked={task.isChecked} onChange={() => toggleTaskCheck(task)}/>
                 <p>{task.text}</p>
             </div>
-            <button onClick={handleDeleteTask}>
+            <button className={styles.trash} onClick={handleDeleteTask}>
                 <Trash size={24}/>
             </button>
         </div>
