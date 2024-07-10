@@ -68,7 +68,7 @@ export default function App() {
               <h3>Tarefas criadas</h3><span>{taskList.length}</span>
             </div>
             <div className={styles.concluded}>
-              <h3>Concluídas</h3><span>{tasksCompleted.length}</span>
+              <h3>Concluídas</h3><span>{taskList.length > 0 ? `${tasksCompleted.length} de ${taskList.length}`  : tasksCompleted.length}</span>
             </div>
           </div>
           
