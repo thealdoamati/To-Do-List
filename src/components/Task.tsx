@@ -1,41 +1,26 @@
 import { Trash } from "phosphor-react";
 import styles from './Task.module.css'
-import { Dispatch, InputHTMLAttributes, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { Task as TaskType } from "../App";
 
 interface TaskProps {
-    content: string;
-    onDelete: (taskDeleted: string) => void;
+    task: TaskType;
+    onDelete: (taskDeleted: TaskType) => void;
     setTasksCompleted: Dispatch<SetStateAction<string[]>>;
     tasksCompleted: string[];
+    check: boolean;
+    toggleTaskCheck: (toggleTask: TaskType) => void
 }
-export default function Task({content, onDelete, setTasksCompleted, tasksCompleted}: TaskProps) {
-    const [isChecked, setIsChecked] = useState(false)
-
+export default function Task({toggleTaskCheck, task, onDelete}: TaskProps) {
     function handleDeleteTask(){
-        onDelete(content);
-    }
-
-    function handleCheckInput(content) {
-        if(isChecked) {
-            setIsChecked(false)
-            console.log('dsdas', tasksCompleted)
-            const tasksWithoutUncheckedOne = tasksCompleted.filter(task =>{
-                return task!==content
-            })
-            setTasksCompleted(tasksWithoutUncheckedOne)
-            console.log('chamei aqui')
-        } else {
-            setIsChecked(true)
-            console.log('dsdas2', tasksCompleted)
-            setTasksCompleted([...tasksCompleted, content])
-        }
+        onDelete(task);
     }
 
     return(
         <div className={styles.task}>
             <div className={styles.taskContainer}>
-                <input type="checkbox" id="taskCheck" onChange={handleCheckInput}/>
-                <p>{content}</p>
+                <input type="checkbox" checked={task.isChecked} onChange={() => toggleTaskCheck(task)}/>
+                <p>{task.text}</p>
             </div>
             <button onClick={handleDeleteTask}>
                 <Trash size={24}/>
