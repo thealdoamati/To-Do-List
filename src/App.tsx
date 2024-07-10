@@ -1,18 +1,20 @@
 import './global.css'
 import styles from './App.module.css'
 import Header from './components/Header'
-import TaskBoard from './components/TaskBoard'
-import { PlusCircle } from 'phosphor-react'
+import { Notepad, PlusCircle } from 'phosphor-react'
 import { useState } from 'react'
+import Task from './components/Task'
 
-interface ITask {
-  id: number;
-  name: string;
-  isChecked: boolean;
+interface Task {
+  id: number
+  text: string
+  isChecked: boolean
 }
+
 export default function App() {
   const [taskText, setTaskText] = useState('');
-  const [taskList, setTaskList] = useState<ITask[]>([]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
+  const [tasksCompleted, setTasksCompleted] = useState<string[]>([])
 
   function handleTaskText(event){
     event.preventDefault();
@@ -22,15 +24,17 @@ export default function App() {
 
   function handleCreateTask(event){
     event.preventDefault();
-    const newTask: ITask = {
-      id: new Date().getTime(),
-      name: taskText,
-      isChecked: false,
-    }
-    setTaskList((state) => [...taskList, newTask]);
+    setTaskList([...taskList, taskText]);
     console.log(taskList);
     setTaskText('');
   }
+
+  function deleteTask(taskDeleted: string){
+    const tasksWithoutDeletedOne = taskList.filter(task =>{
+        return task!==taskDeleted
+    })
+    setTaskList(tasksWithoutDeletedOne)
+}
 
   return (
     <div>
@@ -45,10 +49,32 @@ export default function App() {
             <div>Tarefas criadas<span>{taskList.length}</span></div>
             <div>Concluídas<span>0</span></div>
           </div>
-          <TaskBoard
-            taskList={taskList}
-            setTaskList={setTaskList}
-          />
+          
+          <div className={styles.taskBoard}>
+            {taskList.length > 0 ?
+              <>
+                {taskList.map(task => {
+                  return(
+                    <Task
+                      setTasksCompleted={setTasksCompleted}
+                      tasksCompleted={tasksCompleted}
+                      onDelete={deleteTask}
+                      key={task}
+                      content={task}
+                    />
+                  )
+                })}
+              </>
+            :
+              <div className={styles.noTask}>
+                <Notepad size={56}/>
+                  <div>
+                    <strong>Você ainda não tem tarefas cadastradas</strong>
+                    <p>Crie tarefas e organize seus itens a fazer</p>
+                  </div>
+              </div>
+            }
+          </div>
         </div>
       </div>
    </div>
